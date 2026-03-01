@@ -9,6 +9,12 @@ import { CartService } from './cart.service';
  * Manages product list state using Angular Signals
  * Consumes ProductRepository to fetch data from API
  */
+/**
+ * Product Service
+ * Manages product state across the application
+ * 
+ * Design Pattern: Singleton - Single instance manages shared state
+ */
 @Injectable({
   providedIn: 'root'
 })

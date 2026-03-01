@@ -1,5 +1,6 @@
 import { Component, inject, OnInit, ViewChild, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,7 +8,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DragDropModule, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { ScrollingModule, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-
 import { toObservable } from '@angular/core/rxjs-interop';
 import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
@@ -18,8 +18,17 @@ import { Product } from '../../models/product.model';
   standalone: true,
   imports: [CommonModule, MatCardModule, MatProgressSpinnerModule, MatIconModule, MatButtonModule, MatTooltipModule, DragDropModule, ScrollingModule],
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss']
+  styleUrls: ['./product-list.component.scss'],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('400ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ])
+  ]
 })
+
 export class ProductListComponent implements OnInit {
   private readonly productService = inject(ProductService);
   private readonly cartService = inject(CartService);

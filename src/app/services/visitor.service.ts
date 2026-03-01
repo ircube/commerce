@@ -8,6 +8,12 @@ import { VisitorRepository } from '../services/visitor.repository';
  * Manages visitor/candidate state using Angular Signals
  * Consumes VisitorRepository to fetch data from API
  */
+/**
+ * Visitor Service
+ * Manages visitor and application version information
+ * 
+ * Design Pattern: Singleton - Single instance manages application context
+ */
 @Injectable({
   providedIn: 'root'
 })

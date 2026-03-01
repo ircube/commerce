@@ -28,7 +28,8 @@
           <mat-card
             class="product-card"
             cdkDrag
-            [cdkDragData]="product">
+            [cdkDragData]="product"
+            @fadeIn>
             <div class="product-image-container">
               <img
                 [src]="getProductImage(product)"
