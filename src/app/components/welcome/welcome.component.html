@@ -1,0 +1,28 @@
+<div class="welcome-container">
+  <mat-card class="welcome-card">
+    <mat-card-content>
+      @if (loading()) {
+        <div class="loading-state">
+          <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+          <p>Loading...</p>
+        </div>
+      } @else if (error()) {
+        <div class="error-state">
+          <p>{{ error() }}</p>
+        </div>
+      } @else if (visitor()) {
+        <div class="welcome-content">
+          <div class="candidate-image">
+            <img 
+              src="images/logo.png" 
+              alt="Gapsi Logo"
+              class="avatar"
+            />
+          </div>
+          <h1 class="welcome-title">{{ visitor()?.name }}</h1>
+          <p class="app-version">App Version: {{ visitor()?.version }}</p>
+        </div>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

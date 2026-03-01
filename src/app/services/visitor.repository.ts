@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { Visitor } from '../models/visitor.model';
 import { VisitorMapper } from '../mappers/visitor.mapper';
 import { API_CONFIG } from '../config/api.config';
@@ -21,16 +21,18 @@ export class VisitorRepository {
   private readonly baseUrl = API_CONFIG.baseUrl;
 
   /**
-   * Fetches visitor information from the API
+   * Creates a new visitor session via POST request
    * @returns Observable of Visitor
    */
   getCurrent(): Observable<Visitor> {
     return this.http
-      .get<{
+      .post<{
         code: number;
         description: string;
         data: Record<string, unknown>;
-      }>(`${this.baseUrl}${API_CONFIG.endpoints.visitors}`)
-      .pipe(map((response) => this.mapper.toDomain(response.data)));
+      }>(`${this.baseUrl}${API_CONFIG.endpoints.visitors}`, {})
+      .pipe(
+        map(response => this.mapper.toDomain(response.data))
+      );
   }
 }
