@@ -1,6 +1,6 @@
 {
-  "name": "commerce",
-  "short_name": "commerce",
+  "name": "e-Commerce Gapsi",
+  "short_name": "Gapsi Shop",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

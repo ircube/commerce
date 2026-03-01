@@ -18,7 +18,7 @@ export class VisitorMapper {
    */
   toDomain(data: Record<string, unknown>): Visitor {
     return {
-      name: String(data['name'] ?? 'Bienvenido Candidato 01'),
+      name: String(data['welcome'] ?? data['name'] ?? 'Bienvenido Candidato 01'),
       version: String(data['version'] ?? '1.0.0'),
       image: data['image'] ? String(data['image']) : undefined
     };
