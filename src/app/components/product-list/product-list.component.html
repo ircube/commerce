@@ -26,10 +26,9 @@
       <div *cdkVirtualFor="let row of productRows(); let i = index; trackBy: trackByRow" class="products-row" cdkDropList [id]="'products-row-' + i" [cdkDropListData]="row" (cdkDropListDropped)="drop($event)">
         @for (product of row; track product.sku) {
           <mat-card
-            class="product-card"
+            class="product-card animate-in"
             cdkDrag
-            [cdkDragData]="product"
-            @fadeIn>
+            [cdkDragData]="product">
             <div class="product-image-container">
               <img
                 [src]="getProductImage(product)"
