@@ -17,9 +17,46 @@ html {
 
 @use 'tailwindcss';
 
-/* Global styles */
-html, body {
-  height: 100%;
+/* CDK Drag & Drop styles */
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 8px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  background: white;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  z-index: 2000 !important;
+  width: 300px; /* Explicit width for the preview */
+  animation: none !important; /* CRITICAL: Prevent animate-in from overriding CDK transform */
+}
+
+/* Ensure the preview content is visible and styled */
+.cdk-drag-preview .product-image-container,
+.cdk-drag-preview .cart-item-content {
+  pointer-events: none;
+}
+
+.cdk-drag-preview img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.cdk-drag-preview .product-name,
+.cdk-drag-preview .cart-item-name {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3 !important;
+  border: 2px dashed #3f51b5 !important;
+  background: #f0f0f0 !important;
 }

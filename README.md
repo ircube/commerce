@@ -1,5 +1,7 @@
 # Gapsi e-Commerce - Angular v21 Challenge
 
+**🚀 Live Demo: [https://ircube.github.io/commerce/](https://ircube.github.io/commerce/)**
+
 This project is a modern e-commerce product explorer built with **Angular v21**. It features a high-performance product list with virtual scrolling, dynamic loading, and a seamless drag-and-drop shopping cart experience.
 
 ## 🚀 Getting Started
