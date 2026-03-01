@@ -1,12 +1,20 @@
+<<<<<<< HEAD
 import { Component, inject, OnInit, ViewChild, computed } from '@angular/core';
+=======
+import { Component, inject, OnInit, signal } from '@angular/core';
+>>>>>>> main
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+<<<<<<< HEAD
 import { DragDropModule, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { ScrollingModule, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+=======
+import { ScrollingModule } from '@angular/cdk/scrolling';
+>>>>>>> main
 import { toObservable } from '@angular/core/rxjs-interop';
 import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
@@ -15,13 +23,18 @@ import { Product } from '../../models/product.model';
 @Component({
   selector: 'app-product-list',
   standalone: true,
+<<<<<<< HEAD
   imports: [CommonModule, MatCardModule, MatProgressSpinnerModule, MatIconModule, MatButtonModule, MatTooltipModule, DragDropModule, ScrollingModule],
+=======
+  imports: [CommonModule, MatCardModule, MatProgressSpinnerModule, MatIconModule, MatButtonModule, MatTooltipModule, ScrollingModule],
+>>>>>>> main
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
   private readonly productService = inject(ProductService);
   private readonly cartService = inject(CartService);
+<<<<<<< HEAD
   private readonly placeholderImage = 'images/producto.png';
   private readonly failedImages = new Set<string>();
 
@@ -87,10 +100,32 @@ export class ProductListComponent implements OnInit {
 
   /**
    * Add product to cart (via button)
+=======
+
+  readonly products = this.productService.products;
+  readonly products$ = toObservable(this.productService.products);
+  readonly loading = this.productService.loading;
+  readonly error = this.productService.error;
+
+  ngOnInit(): void {
+    this.productService.loadProducts();
+  }
+
+  /**
+   * Check if a product is in the cart
+   */
+  isInCart(sku: string): boolean {
+    return this.cartService.isInCart(sku);
+  }
+
+  /**
+   * Add product to cart
+>>>>>>> main
    */
   addToCart(product: Product): void {
     this.cartService.add(product);
   }
+<<<<<<< HEAD
 
   /**
    * Get product image URL with fallback to placeholder
@@ -111,4 +146,6 @@ export class ProductListComponent implements OnInit {
   onImageError(product: Product): void {
     this.failedImages.add(product.sku);
   }
+=======
+>>>>>>> main
 }

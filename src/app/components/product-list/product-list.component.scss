@@ -1,5 +1,10 @@
 .product-list-container {
   padding: 1.5rem;
+<<<<<<< HEAD
+=======
+  max-width: 1400px;
+  margin: 0 auto;
+>>>>>>> main
 }
 
 .loading-state,
@@ -18,9 +23,12 @@
 
 .products-header {
   margin-bottom: 1.5rem;
+<<<<<<< HEAD
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
+=======
+>>>>>>> main
 }
 
 .products-header h2 {
@@ -35,6 +43,7 @@
 }
 
 .products-viewport {
+<<<<<<< HEAD
   height: calc(100vh - 280px);
   min-height: 400px;
 }
@@ -57,6 +66,19 @@
   padding: 2rem;
   gap: 1rem;
   color: #666;
+=======
+  height: calc(100vh - 250px);
+  min-height: 400px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  padding: 0.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+>>>>>>> main
 }
 
 .product-card {
@@ -65,11 +87,14 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+<<<<<<< HEAD
   cursor: grab;
 }
 
 .product-card:active {
   cursor: grabbing;
+=======
+>>>>>>> main
 }
 
 .product-card:hover {
@@ -77,6 +102,7 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
+<<<<<<< HEAD
 .cdk-drag-preview {
   box-sizing: border-box;
   border-radius: 8px;
@@ -98,6 +124,8 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
+=======
+>>>>>>> main
 .product-image-container {
   position: relative;
   height: 220px;

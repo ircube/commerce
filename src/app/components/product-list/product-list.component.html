@@ -1,10 +1,18 @@
 <div class="product-list-container">
+<<<<<<< HEAD
   @if (loading() && products().length === 0) {
+=======
+  @if (loading()) {
+>>>>>>> main
     <div class="loading-state">
       <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
       <p>Loading products...</p>
     </div>
+<<<<<<< HEAD
   } @else if (error() && products().length === 0) {
+=======
+  } @else if (error()) {
+>>>>>>> main
     <div class="error-state">
       <mat-icon>error_outline</mat-icon>
       <p>{{ error() }}</p>
@@ -16,6 +24,7 @@
     </div>
 
     <cdk-virtual-scroll-viewport
+<<<<<<< HEAD
       itemSize="440"
       class="products-viewport"
       minBufferPx="880"
@@ -43,11 +52,41 @@
                 <span class="product-price">${{ product.price | number:'1.2-2' }}</span>
                 <button
                   mat-icon-button
+=======
+      itemSize="400"
+      class="products-viewport"
+      minBufferPx="800"
+      maxBufferPx="1200">
+      <div class="products-grid">
+        <mat-card class="product-card" *cdkVirtualFor="let product of products$ | async">
+          <div class="product-image-container">
+            <img
+              [src]="'images/producto.png'"
+              [alt]="product.name"
+              class="product-image"
+            />
+            @if (isInCart(product.sku)) {
+              <div class="in-cart-badge">
+                <mat-icon>shopping_cart</mat-icon>
+                <span>In Cart</span>
+              </div>
+            }
+          </div>
+          <mat-card-content class="product-content">
+            <h3 class="product-name">{{ product.name }}</h3>
+            <p class="product-description">{{ product.description }}</p>
+            <div class="product-footer">
+              <span class="product-price">${{ product.price | number:'1.2-2' }}</span>
+              @if (!isInCart(product.sku)) {
+                <button 
+                  mat-icon-button 
+>>>>>>> main
                   class="add-to-cart-btn"
                   (click)="addToCart(product)"
                   matTooltip="Add to cart">
                   <mat-icon>add_shopping_cart</mat-icon>
                 </button>
+<<<<<<< HEAD
               </div>
             </mat-card-content>
           </mat-card>
@@ -60,6 +99,13 @@
           <p>Loading more products...</p>
         </div>
       }
+=======
+              }
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+>>>>>>> main
     </cdk-virtual-scroll-viewport>
   }
 </div>
