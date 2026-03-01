@@ -34,13 +34,29 @@
   margin: 0;
 }
 
-.products-grid {
+.products-viewport {
+  height: calc(100vh - 280px);
+  min-height: 400px;
+}
+
+.products-row {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem 1.5rem 1rem;
   max-width: 900px;
   margin: 0 auto;
+  height: 440px;
+  box-sizing: border-box;
+}
+
+.loading-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  gap: 1rem;
+  color: #666;
 }
 
 .product-card {

@@ -21,16 +21,20 @@ export class ProductRepository {
   private readonly baseUrl = API_CONFIG.baseUrl;
 
   /**
-   * Fetches all products from the API
+   * Fetches products from the API with pagination
+   * @param page - Page number (0-indexed)
+   * @param size - Number of items per page
    * @returns Observable of Product array
    */
-  getAll(): Observable<Product[]> {
+  getAll(page = 0, size = 10): Observable<Product[]> {
     return this.http
       .get<{
         code: number;
         description: string;
         data: { products: Record<string, unknown>[] };
-      }>(`${this.baseUrl}${API_CONFIG.endpoints.products}`)
+      }>(`${this.baseUrl}${API_CONFIG.endpoints.products}`, {
+        params: { page, size }
+      })
       .pipe(map((response) => this.mapper.toDomainList(response.data.products)));
   }
 

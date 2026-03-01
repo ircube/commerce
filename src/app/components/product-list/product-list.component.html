@@ -1,10 +1,10 @@
 <div class="product-list-container">
-  @if (loading()) {
+  @if (loading() && products().length === 0) {
     <div class="loading-state">
       <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
       <p>Loading products...</p>
     </div>
-  } @else if (error()) {
+  } @else if (error() && products().length === 0) {
     <div class="error-state">
       <mat-icon>error_outline</mat-icon>
       <p>{{ error() }}</p>
@@ -15,31 +15,32 @@
       <p class="product-count">{{ products().length }} items available</p>
     </div>
 
-    <div class="products-grid" cdkDropList id="products" cdkDropListConnectedTo="cart" [cdkDropListData]="products$ | async" (cdkDropListDropped)="drop($event)">
-      @for (product of products$ | async; track product.sku) {
-        <mat-card 
-          class="product-card"
-          cdkDrag
-          [cdkDragData]="product">
-          <div class="product-image-container">
-            <img
-              [src]="'images/producto.png'"
-              [alt]="product.name"
-              class="product-image"
-            />
-            @if (isInCart(product.sku)) {
-              <div class="in-cart-badge">
-                <mat-icon>shopping_cart</mat-icon>
-                <span>In Cart</span>
-              </div>
-            }
-          </div>
-          <mat-card-content class="product-content">
-            <h3 class="product-name">{{ product.name }}</h3>
-            <p class="product-description">{{ product.description }}</p>
-            <div class="product-footer">
-              <span class="product-price">${{ product.price | number:'1.2-2' }}</span>
-              @if (!isInCart(product.sku)) {
+    <cdk-virtual-scroll-viewport
+      itemSize="440"
+      class="products-viewport"
+      minBufferPx="880"
+      maxBufferPx="1320"
+      (scrolledIndexChange)="onScroll($event)">
+      
+      <div *cdkVirtualFor="let row of productRows(); let i = index; trackBy: trackByRow" class="products-row" cdkDropList [id]="'products-row-' + i" [cdkDropListData]="row" (cdkDropListDropped)="drop($event)">
+        @for (product of row; track product.sku) {
+          <mat-card
+            class="product-card"
+            cdkDrag
+            [cdkDragData]="product">
+            <div class="product-image-container">
+              <img
+                [src]="getProductImage(product)"
+                [alt]="product.name"
+                class="product-image"
+                (error)="onImageError(product)"
+              />
+            </div>
+            <mat-card-content class="product-content">
+              <h3 class="product-name">{{ product.name }}</h3>
+              <p class="product-description">{{ product.description }}</p>
+              <div class="product-footer">
+                <span class="product-price">${{ product.price | number:'1.2-2' }}</span>
                 <button
                   mat-icon-button
                   class="add-to-cart-btn"
@@ -47,11 +48,18 @@
                   matTooltip="Add to cart">
                   <mat-icon>add_shopping_cart</mat-icon>
                 </button>
-              }
-            </div>
-          </mat-card-content>
-        </mat-card>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+      
+      @if (loading() && products().length > 0) {
+        <div class="loading-more">
+          <mat-progress-spinner diameter="40" mode="indeterminate"></mat-progress-spinner>
+          <p>Loading more products...</p>
+        </div>
       }
-    </div>
+    </cdk-virtual-scroll-viewport>
   }
 </div>
