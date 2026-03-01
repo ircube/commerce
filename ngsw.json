@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1772406180869,
+  "timestamp": 1772407096379,
   "index": "/commerce/index.html",
   "assetGroups": [
     {
@@ -13,9 +13,9 @@
       "urls": [
         "/commerce/favicon.ico",
         "/commerce/index.html",
-        "/commerce/main-U6MSNU4E.js",
+        "/commerce/main-JPWH4CTO.js",
         "/commerce/manifest.webmanifest",
-        "/commerce/styles-IFCIPKXM.css"
+        "/commerce/styles-QYTFNWMZ.css"
       ],
       "patterns": []
     },
@@ -80,8 +80,8 @@
     "/commerce/images/logo.png": "2f203f51c1466976cf0a4853dc6f2dc48b3bbc9c",
     "/commerce/images/logoBlanco.png": "a1b35eaca4c0aebd40d7ddb9365d140a823626bd",
     "/commerce/images/producto.png": "f8980d019ed6ea83594ed62832949e753abfcd10",
-    "/commerce/index.html": "af120f55d8346e677643ed70916dc95841856743",
-    "/commerce/main-U6MSNU4E.js": "27c9ffa13ad5d468ccbeacb708fa6550d4e0fbb9",
+    "/commerce/index.html": "4b5bfcae7272c510249861bb8a8d37bb309b3e97",
+    "/commerce/main-JPWH4CTO.js": "9bf992f2f728bec5d5394b664e1f13b950223e70",
     "/commerce/manifest.webmanifest": "80d37fcdefa33bd609d3a454dfb58b8730878d4b",
     "/commerce/products/audifonos.jpg": "2d6a3868a89e21011a0c42941ca49accb90214ba",
     "/commerce/products/bicicleta.jpg": "14569d201a79366f6e523a80a170161fcd937a8e",
@@ -105,7 +105,7 @@
     "/commerce/products/tela.jpg": "37a3b0a7401f54046466777cad503a3d2aedef65",
     "/commerce/products/televisor.jpg": "814675b9d12c815089ae251281e2493d6e391181",
     "/commerce/products/vela.jpg": "0ff375b797e9a7acb9ddcb4638243b1aec4ea854",
-    "/commerce/styles-IFCIPKXM.css": "edd6ebd52be1803a83f8c7a7566396acc45a4200"
+    "/commerce/styles-QYTFNWMZ.css": "4c063f3d4f573c9b5bc5a6ca2675c376268c0895"
   },
   "navigationUrls": [
     {
