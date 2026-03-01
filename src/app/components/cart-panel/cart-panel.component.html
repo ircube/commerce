@@ -1,0 +1,110 @@
+<div class="cart-panel-wrapper">
+  <!-- Cart toggle button (bookmark style) -->
+  <button 
+    class="cart-toggle-btn"
+    [class.open]="isOpen()"
+    (click)="toggle()"
+    mat-fab
+    extended
+    [matBadge]="count()"
+    matBadgeColor="accent"
+    matTooltip="Toggle shopping cart"
+    cdkDropList
+    id="cart-btn"
+    [cdkDropListData]="null"
+    (cdkDropListDropped)="drop($event)">
+    <mat-icon>shopping_cart</mat-icon>
+    <span class="btn-text">{{ isOpen() ? 'Close Cart' : 'Cart' }}</span>
+  </button>
+
+  <!-- Side navigation panel -->
+  <mat-sidenav-container class="cart-sidenav-container" [class.open]="isOpen()" [hasBackdrop]="false">
+    <mat-sidenav 
+      class="cart-sidenav"
+      position="end"
+      mode="over"
+      [opened]="isOpen()"
+      (openedChange)="isOpen.set($event)"
+      [style.width.px]="400">
+      
+      <div class="cart-header">
+        <div class="cart-title">
+          <mat-icon>shopping_cart</mat-icon>
+          <h2>Shopping Cart</h2>
+        </div>
+        <div class="header-actions">
+          @if (count() > 0) {
+            <button 
+              mat-icon-button 
+              color="warn" 
+              (click)="clearCart()"
+              matTooltip="Clear cart">
+              <mat-icon>delete_sweep</mat-icon>
+            </button>
+          }
+          <button 
+            mat-icon-button 
+            (click)="close()"
+            matTooltip="Close cart">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- Cart items list with drop zone -->
+      <div cdkDropList 
+           id="cart"
+           [cdkDropListData]="cartItems()" 
+           (cdkDropListDropped)="drop($event)"
+           class="cart-list">
+        @if (count() === 0) {
+          <div class="empty-cart">
+            <mat-icon>remove_shopping_cart</mat-icon>
+            <p>Your cart is empty</p>
+            <span>Drag products here to add them</span>
+          </div>
+        } @else {
+          @for (item of cartItems(); track item.sku) {
+            <div cdkDrag class="cart-item" [cdkDragData]="item">
+              <div class="cart-item-content">
+                <img [src]="getProductImage(item)" [alt]="item.name" class="cart-item-image" (error)="onImageError(item)" />
+                <div class="cart-item-details">
+                  <h3 class="cart-item-name">{{ item.name }}</h3>
+                  <p class="cart-item-sku">{{ item.sku }}</p>
+                  <div class="cart-item-price-row">
+                    <span class="cart-item-price">${{ item.price | number:'1.2-2' }}</span>
+                  </div>
+                </div>
+                <div class="cart-item-actions">
+                  <button 
+                    mat-icon-button 
+                    color="warn"
+                    (click)="removeFromCart(item.sku)"
+                    matTooltip="Remove from cart">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div cdkDragHandle class="drag-handle">
+                <mat-icon>drag_indicator</mat-icon>
+              </div>
+            </div>
+          }
+        }
+      </div>
+
+      <!-- Cart footer with summary -->
+      @if (count() > 0) {
+        <div class="cart-footer">
+          <div class="cart-summary">
+            <div class="summary-row total">
+              <span>Items:</span>
+              <span>{{ count() }}</span>
+            </div>
+          </div>
+        </div>
+      }
+    </mat-sidenav>
+    <mat-sidenav-content></mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

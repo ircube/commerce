@@ -1,5 +1,4 @@
 import { Injectable, signal, computed, Signal } from '@angular/core';
-import { CartItem, CartState } from '../models/cart.model';
 import { Product } from '../models/product.model';
 
 /**
@@ -10,46 +9,25 @@ import { Product } from '../models/product.model';
 })
 export class CartService {
   // Private signal for cart items
-  #items = signal<CartItem[]>([]);
+  #items = signal<Product[]>([]);
 
   /**
    * Public readonly signal for cart items
    */
-  readonly items: Signal<CartItem[]> = this.#items.asReadonly();
-
-  /**
-   * Computed signal for cart total
-   */
-  readonly total = computed(() => 
-    this.#items().reduce((sum, item) => sum + (item.price * item.quantity), 0)
-  );
+  readonly items: Signal<Product[]> = this.#items.asReadonly();
 
   /**
    * Computed signal for cart item count
    */
-  readonly count = computed(() => 
-    this.#items().reduce((sum, item) => sum + item.quantity, 0)
-  );
+  readonly count = computed(() => this.#items().length);
 
   /**
-   * Adds a product to the cart or increments quantity if already exists
+   * Adds a product to the cart at the top if it doesn't already exist
    * @param product - Product to add
    */
   add(product: Product): void {
-    const currentItems = this.#items();
-    const existingIndex = currentItems.findIndex(item => item.sku === product.sku);
-
-    if (existingIndex >= 0) {
-      // Increment quantity if product already in cart
-      const updatedItems = [...currentItems];
-      updatedItems[existingIndex] = {
-        ...updatedItems[existingIndex],
-        quantity: updatedItems[existingIndex].quantity + 1
-      };
-      this.#items.set(updatedItems);
-    } else {
-      // Add new product with quantity 1
-      this.#items.update(items => [...items, { ...product, quantity: 1 }]);
+    if (!this.isInCart(product.sku)) {
+      this.#items.update(items => [product, ...items]);
     }
   }
 
@@ -59,27 +37,6 @@ export class CartService {
    */
   remove(sku: string): void {
     this.#items.update(items => items.filter(item => item.sku !== sku));
-  }
-
-  /**
-   * Decrements product quantity or removes if quantity reaches 0
-   * @param sku - Product SKU to decrement
-   */
-  decrement(sku: string): void {
-    const currentItems = this.#items();
-    const existingItem = currentItems.find(item => item.sku === sku);
-
-    if (existingItem) {
-      if (existingItem.quantity === 1) {
-        this.remove(sku);
-      } else {
-        this.#items.update(items =>
-          items.map(item =>
-            item.sku === sku ? { ...item, quantity: item.quantity - 1 } : item
-          )
-        );
-      }
-    }
   }
 
   /**

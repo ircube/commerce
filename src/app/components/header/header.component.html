@@ -8,5 +8,26 @@
       />
       <h1 class="app-title">e-Commerce Gapsi</h1>
     </div>
+    
+    <div class="actions-section">
+      <!-- PWA Status Indicator -->
+      @if (!isOnline()) {
+        <mat-icon 
+          class="offline-icon" 
+          color="warn" 
+          matTooltip="Working offline - Some features may be unavailable">
+          cloud_off
+        </mat-icon>
+      }
+      
+      <button 
+        mat-icon-button 
+        color="warn" 
+        (click)="resetApplication()"
+        matTooltip="Reset Application"
+        aria-label="Reset application">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
   </div>
 </mat-toolbar>
