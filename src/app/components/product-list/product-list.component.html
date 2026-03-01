@@ -1,0 +1,57 @@
+<div class="product-list-container">
+  @if (loading()) {
+    <div class="loading-state">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+      <p>Loading products...</p>
+    </div>
+  } @else if (error()) {
+    <div class="error-state">
+      <mat-icon>error_outline</mat-icon>
+      <p>{{ error() }}</p>
+    </div>
+  } @else {
+    <div class="products-header">
+      <h2>Products</h2>
+      <p class="product-count">{{ products().length }} items available</p>
+    </div>
+
+    <div class="products-grid" cdkDropList id="products" cdkDropListConnectedTo="cart" [cdkDropListData]="products$ | async" (cdkDropListDropped)="drop($event)">
+      @for (product of products$ | async; track product.sku) {
+        <mat-card 
+          class="product-card"
+          cdkDrag
+          [cdkDragData]="product">
+          <div class="product-image-container">
+            <img
+              [src]="'images/producto.png'"
+              [alt]="product.name"
+              class="product-image"
+            />
+            @if (isInCart(product.sku)) {
+              <div class="in-cart-badge">
+                <mat-icon>shopping_cart</mat-icon>
+                <span>In Cart</span>
+              </div>
+            }
+          </div>
+          <mat-card-content class="product-content">
+            <h3 class="product-name">{{ product.name }}</h3>
+            <p class="product-description">{{ product.description }}</p>
+            <div class="product-footer">
+              <span class="product-price">${{ product.price | number:'1.2-2' }}</span>
+              @if (!isInCart(product.sku)) {
+                <button
+                  mat-icon-button
+                  class="add-to-cart-btn"
+                  (click)="addToCart(product)"
+                  matTooltip="Add to cart">
+                  <mat-icon>add_shopping_cart</mat-icon>
+                </button>
+              }
+            </div>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+</div>
