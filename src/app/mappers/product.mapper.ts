@@ -17,11 +17,16 @@ export class ProductMapper {
    * @returns Product domain model
    */
   toDomain(data: Record<string, unknown>): Product {
+    const rawImage = String(data['image'] ?? '');
+    // Redirect all image paths to the products/ folder
+    // Remove leading slash if present to avoid double slashes when prefixing
+    const imagePath = rawImage ? `products/${rawImage.startsWith('/') ? rawImage.substring(1) : rawImage}` : '';
+
     return {
       type: String(data['type'] ?? 'Product'),
       sku: String(data['sku'] ?? ''),
       name: String(data['name'] ?? ''),
-      image: String(data['image'] ?? ''),
+      image: imagePath,
       description: String(data['description'] ?? ''),
       price: Number(data['price'] ?? 0)
     };
